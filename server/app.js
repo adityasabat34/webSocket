@@ -8,6 +8,7 @@ const app = express();
 const corsOptions = {
   origin: "http://localhost:5173",
   credentials: true,
+  methods: ["GET", "POST"],
 };
 
 // app.use(cors(corsOptions));
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log("a user connected");
   console.log("id", socket.id);
+  socket.emit("welcome", "Hello from the server");
 });
 
 const port = 4001;
