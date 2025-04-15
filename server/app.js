@@ -25,7 +25,8 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log("a user connected");
   console.log("id", socket.id);
-  socket.emit("welcome", "Hello from the server");
+  socket.emit("welcome", `Hello from the server`);
+  socket.broadcast.emit("welcome", `${socket.id} joined the server`);
 });
 
 const port = 4001;
