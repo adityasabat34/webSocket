@@ -23,10 +23,13 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  console.log("id", socket.id);
-  socket.emit("welcome", `Hello from the server`);
-  socket.broadcast.emit("welcome", `${socket.id} joined the server`);
+  console.log("a user connected", socket.id);
+  //   console.log("id", socket.id);
+  //   socket.emit("welcome", `Hello from the server`);
+  //   socket.broadcast.emit("welcome", `${socket.id} joined the server`);
+  socket.on("disconnect", () => {
+    console.log("user disconnected", socket.id);
+  });
 });
 
 const port = 4001;

@@ -13,6 +13,10 @@ const App = () => {
     socket.on("welcome", (data) => {
       console.log(data);
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [socket]);
   return <div>App</div>;
 };
