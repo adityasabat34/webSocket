@@ -30,6 +30,10 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
   });
+
+  socket.on("message", (data) => {
+    console.log("message", data);
+  });
 });
 
 const port = 4001;
