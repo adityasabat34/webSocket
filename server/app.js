@@ -33,6 +33,7 @@ io.on("connection", (socket) => {
 
   socket.on("message", (data) => {
     console.log("message", data);
+    io.emit("recieved message", data);
   });
 });
 

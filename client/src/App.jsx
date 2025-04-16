@@ -23,6 +23,10 @@ const App = () => {
       console.log(data);
     });
 
+    socket.on("received message", (data) => {
+      console.log(data);
+    });
+
     return () => {
       socket.disconnect();
     };
@@ -44,6 +48,8 @@ const App = () => {
           Send
         </Button>
       </form>
+
+      <h1>{message}</h1>
     </Container>
   );
 };
