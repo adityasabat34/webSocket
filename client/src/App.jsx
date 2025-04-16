@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { Button, Container, TextField, Typography } from "@mui/material";
 
 const App = () => {
-  const socket = io("http://localhost:4001");
+  const socket = useMemo(() => io("http://localhost:4001"), []);
 
   const [message, setMessage] = useState("");
 
