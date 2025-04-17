@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
 
   socket.on("message", ({ room, message }) => {
     console.log({ message, room });
-    socket.to(room).emit("recieve-message", message);
+    io.to(room).emit("recieve-message", message);
   });
 });
 
