@@ -23,7 +23,7 @@ const App = () => {
       console.log(data);
     });
 
-    socket.on("received message", (data) => {
+    socket.on("recieve-message", (data) => {
       console.log(data);
     });
 
@@ -49,7 +49,7 @@ const App = () => {
         </Button>
       </form>
 
-      <h1>{message}</h1>
+      {/* <h1>{message}</h1> */}
     </Container>
   );
 };
