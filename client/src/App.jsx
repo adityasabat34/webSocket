@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField, Typography, Stack } from "@mui/material";
 
 const App = () => {
   const socket = useMemo(() => io("http://localhost:4001"), []);
@@ -11,24 +11,21 @@ const App = () => {
   const [roomID, setRoomID] = useState("");
   const [messages, setMessages] = useState([]);
 
-  console.log(messages);
+  // console.log(messages);
 
-  const Opt = useMemo(() => {
-    message;
-  }, [message]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit("message", { message, room });
-    // socket.emit("join-room", room);
-    setMessage("");
-    setRoom("");
+    if (message && room) {
+      socket.emit("message", { message, room });
+      setMessage("");
+      setRoom("");
+    }
   };
 
   useEffect(() => {
     socket.on("connect", () => {
       console.log("connected", socket.id);
       setRoomID(socket.id);
-      setMessages([]);
     });
 
     socket.on("welcome", (data) => {
@@ -74,6 +71,12 @@ const App = () => {
       </form>
 
       {/* <h1>{message}</h1> */}
+
+      <Stack>
+        {messages.map((message) => (
+          <Typography key={message.id}>{message}</Typography>
+        ))}
+      </Stack>
     </Container>
   );
 };
