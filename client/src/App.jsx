@@ -9,7 +9,13 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
   const [roomID, setRoomID] = useState("");
+  const [messages, setMessages] = useState([]);
 
+  console.log(messages);
+
+  const Opt = useMemo(() => {
+    message;
+  }, [message]);
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit("message", { message, room });
@@ -22,6 +28,7 @@ const App = () => {
     socket.on("connect", () => {
       console.log("connected", socket.id);
       setRoomID(socket.id);
+      setMessages([]);
     });
 
     socket.on("welcome", (data) => {
@@ -30,6 +37,7 @@ const App = () => {
 
     socket.on("recieve-message", (data) => {
       console.log(data);
+      setMessages((prev) => [...prev, data]);
     });
 
     return () => {
