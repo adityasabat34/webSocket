@@ -10,8 +10,10 @@ const App = () => {
   const [room, setRoom] = useState("");
   const [roomID, setRoomID] = useState("");
   const [messages, setMessages] = useState([]);
+  const [roomName, setRoomName] = useState("");
 
   // console.log(messages);
+  console.log(roomName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,13 @@ const App = () => {
       setMessage("");
       setRoom("");
     }
+  };
+
+  const joinRoomHandler = (e) => {
+    e.preventDefault();
+    socket.emit("join-room", roomName);
+    setRoomName("");
+    setMessage("");
   };
 
   useEffect(() => {
@@ -46,6 +55,21 @@ const App = () => {
       {/* <Typography variant="h1">Web Socket</Typography> */}
 
       <Typography variant="h6">{roomID}</Typography>
+
+      <form onSubmit={joinRoomHandler}>
+        <h5>Room Name</h5>
+        <TextField
+          value={roomName}
+          onChange={(e) => setRoomName(e.target.value)}
+          id="outlined-basic"
+          label="roomName"
+          variant="outlined"
+          margin="normal"
+        />
+        <Button type="submit" variant="contained">
+          Join
+        </Button>
+      </form>
 
       <form onSubmit={handleSubmit}>
         <TextField

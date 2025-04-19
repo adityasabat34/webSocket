@@ -35,6 +35,11 @@ io.on("connection", (socket) => {
     console.log({ message, room });
     io.to(room).emit("recieve-message", message);
   });
+
+  socket.on("join-room", (room) => {
+    socket.join(room);
+    console.log("joined room", room);
+  });
 });
 
 const port = 4001;
